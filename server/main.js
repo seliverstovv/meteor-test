@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
-import '/imports/api/tasksMethods';
-import '/imports/api/tasksPublications';
+import '/imports/api/tasks/methods';
+import '/imports/api/messages/methods';
+import '/imports/api/tasks/publications';
+import '/imports/api/messages/publications';
+import '/imports/api/users/publications';
 
 const testUsers = [
     {
