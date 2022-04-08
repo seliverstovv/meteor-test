@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { MessageCollection } from '/imports/db/messages';
 import { Message } from './Message';
+import { MessageInput } from './MessageInput';
 
 export const Chat = () => {
-    const [text, setText] = useState('');
-    const isDisabledSubmit = text.trim().length === 0;
-
     const { messageList, isLoading } = useTracker(() => {
         const noDataAvailable = { messageList: [] };
         if (!Meteor.user()) {
@@ -23,14 +21,8 @@ export const Chat = () => {
         return { messageList };
     });
 
-    const handleSubmit = e => {
-        e.preventDefault();
-
-        if (isDisabledSubmit) return;
-
+    const handleSubmit = (text) => {
         Meteor.call('messages.insert', text);
-
-        setText('');
     };
 
     return (
@@ -56,10 +48,7 @@ export const Chat = () => {
                     ))
                 )}
             </span>
-            <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center' }}>
-                <input type="text" value={text} onChange={(e) => setText(e.target.value)}/>
-                <button onClick={handleSubmit} disabled={isDisabledSubmit}>Send</button>
-            </div>
+            <MessageInput handleSubmit={handleSubmit}/>
         </section>
     );
 };
