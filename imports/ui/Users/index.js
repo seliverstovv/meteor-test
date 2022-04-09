@@ -27,6 +27,7 @@ export const Users = () => {
             ) : (
                 userList.map((user) => (
                     <>
+                        <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: user.status.online ? 'lime' : 'gray' }}/>
                         <p>NAME: {user.username}</p>
                         <p>ID: {user._id}</p>
                     </>
